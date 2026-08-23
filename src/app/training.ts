@@ -25,7 +25,6 @@ let user2: IUser = {
   age: 30
 };
 
-
 interface IStudent extends IUser {
   faculty: string;
 }
@@ -69,7 +68,8 @@ const users: IUser[] = [
     city: 'Sochi'
   }
 ];
-const filteredUsers = users.filter((user) => {
+
+const filteredUsers: IUser[] = users.filter((user:IUser) => {
   return user.age > 25;
 });
 console.log(filteredUsers);
