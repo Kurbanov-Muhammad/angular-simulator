@@ -1,1 +1,67 @@
-<h1 style="display: flex; justify-content: center; font-family: sans-serif;">NGX SIMULATOR</h1>
+<header class="header">
+  <div class="super-header">
+    <div class="container">
+      <div>
+        <img src="./images/mountains-icon.svg" alt="mountains">
+      </div>
+      <div>
+        <nav class="navy-wrapper">
+          <a>Главная</a>
+          <a>Про гида</a>
+          <a>Программа тура</a>
+          <a>Стоимость</a>
+          <a>Блог</a>
+          <a>Контакты</a>
+        </nav>
+      </div>
+      <div class="consultation-button">
+        <span>Консультация</span>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="main-header">
+  <div class="banner"></div>
+  <div class="slogan">
+    <span>{{companySlogan}}</span>
+    <span>{{continuationSlogan}}</span>
+  </div>
+
+  <div class="bg-surface">
+    <form class="search-widget">
+      <div class="input-group">
+        <div class="frame">
+          <label>Локация для тура</label>
+          <span class="arrow">▾</span>
+          <select class="hidden-select">
+            <option>Вариант 1</option>
+            <option>Вариант 2</option>
+          </select>
+        </div>
+        <p class="description">выберите из списка</p>
+      </div>
+      <div class="input-group">
+        <div class="frame" onclick="this.querySelector('#trip-date').showPicker();" style="cursor: pointer;">
+          <label for="trip-date">Дата похода</label>
+          <span class="calendar-icon">
+            <img src="./images/date-icon.svg" alt="Календарь" width="18" height="18">
+          </span>
+          <input type="date" id="trip-date" class="hidden-select" required>
+        </div>
+        <p class="description">укажите дату</p>
+      </div>
+      <div class="input-group">
+        <div class="frame">
+          <label>Участники</label>
+          <span class="arrow">▾</span>
+          <select class="hidden-select">
+            <option>Вариант 1</option>
+            <option>Вариант 2</option>
+          </select>
+        </div>
+        <p class="description">выберите из списка</p>
+      </div>
+      <button type="submit" class="btn-search">Найти программу</button>
+    </form>
+  </div>
+</section>
