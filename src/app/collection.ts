@@ -1,29 +1,29 @@
 export class Collection<T> {
-  #items: T[];
+  private items: T[];
   constructor(initialElements: T[]) {
-    this.#items = initialElements;
+    this.items = initialElements;
   }
 
   getAll(): T[] {
-    return this.#items;
+    return this.items;
   }
 
   getItem(number: number): T {
-    return this.#items[number];
+    return this.items[number];
   }
 
   clear(): void {
-    this.#items = [];
+    this.items = [];
   }
 
   remove(number: number): void {
-    this.#items = this.#items.filter((item, index) => {
+    this.items = this.items.filter((item: T, index: number) => {
       return index !== number;
     });
   }
 
   replace(number: number, newElement: T): void {
-    this.#items = this.#items.map((item, index) => {
+    this.items = this.items.map((item: T, index: number) => {
       if (index === number) {
         return newElement;
       } else {
@@ -33,9 +33,9 @@ export class Collection<T> {
   }
 }
 
-const stringCollection = new Collection<string>([
+const stringCollection: Collection<string> = new Collection<string>([
   'cucumber', 'tomato', 'apple', 'banana', 'orange']);
 
-const numberCollection = new Collection<number>([
+const numberCollection: Collection<number> = new Collection<number>([
   1, 2, 3, 4, 5]);
 
