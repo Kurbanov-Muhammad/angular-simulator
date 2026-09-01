@@ -1,0 +1,11 @@
+@use './fonts';
+@use './normalize';
+
+* {
+  font-family: 'Nunito-Sans';
+}
+
+.container {
+  display: block;
+  width: 1320px;
+}

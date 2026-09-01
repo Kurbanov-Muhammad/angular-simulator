@@ -49,7 +49,7 @@ function formatString(text: string, format: 'uppercase' | 'lowercase' | 'capital
 }
 
 function removeChar(text: string, symbol: string): string {
-  return text.replaceAll(symbol,"");
+  return text.replaceAll(symbol, "");
 }
 
 const users: IUser[] = [
@@ -69,7 +69,7 @@ const users: IUser[] = [
   }
 ];
 
-const filteredUsers: IUser[] = users.filter((user:IUser) => {
+const filteredUsers: IUser[] = users.filter((user: IUser) => {
   return user.age > 25;
 });
 console.log(filteredUsers);
