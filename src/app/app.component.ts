@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import './training';
 import { Color } from '../enums/Color';
 import './collection';
-import { IService } from '../app/interfaces/IService';
+import { ISection } from './interfaces/ISection';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   companySlogan: string = 'Насладись прогулкой в горах';
   continuationSlogan: string = 'с командой единомышленников';
   hoveredImageId: number | null = null;
@@ -24,7 +25,7 @@ export class AppComponent {
   showClock: boolean = true;
   isLoading: boolean = true;
 
-  services: IService[] = [
+  sections: ISection[] = [
     {
       id: 1,
       icon: './images/people_icon.svg',
@@ -48,14 +49,6 @@ export class AppComponent {
     },
   ];
 
-  private isPrimaryColor(color: Color): boolean {
-    return color === Color.RED_COLOR || color === Color.BLUE_COLOR || color === Color.GREEN_COLOR;
-  }
-
-  private saveLastVisitDate(): void {
-    localStorage.setItem('lastVisit', new Date().toString());
-  }
-
   constructor() {
     this.saveLastVisitDate();
     this.incrementVisitCount();
@@ -65,22 +58,10 @@ export class AppComponent {
     }, 2000);
   }
 
-  private incrementVisitCount(): void {
-    const visitCount: string | null = localStorage.getItem('visitCount');
-    const count: number = Number(visitCount) || 0;
-    localStorage.setItem('visitCount', (count + 1).toString());
-  }
-
   isFormInvalid(): boolean {
     return (
       this.selectedLocation === '' || this.selectedDate === '' || this.participantsCount === ''
     );
-  }
-
-  private startClock(): void {
-    setInterval(() => {
-      this.currentTime = new Date().toString();
-    }, 1000);
   }
 
   incrementClicks(): void {
@@ -96,4 +77,25 @@ export class AppComponent {
   toggleView(): void {
     this.showClock = !this.showClock;
   }
+
+  private incrementVisitCount(): void {
+    const visitCount: string | null = localStorage.getItem('visitCount');
+    const count: number = Number(visitCount) || 0;
+    localStorage.setItem('visitCount', (count + 1).toString());
+  }
+
+  private isPrimaryColor(color: Color): boolean {
+    return color === Color.RED_COLOR || color === Color.BLUE_COLOR || color === Color.GREEN_COLOR;
+  }
+
+  private saveLastVisitDate(): void {
+    localStorage.setItem('lastVisit', new Date().toString());
+  }
+
+  private startClock(): void {
+    setInterval(() => {
+      this.currentTime = new Date().toString();
+    }, 1000);
+  }
+
 }

@@ -1,4 +1,4 @@
-export interface IService {
+export interface ISection {
   id: number;
   icon: string;
   title: string;
