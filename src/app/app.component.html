@@ -44,7 +44,7 @@
     </div>
 
     <div class="bg-surface">
-      <form class="search-widget">
+      <form class="search-widget" id="tour-search-form">
         <div class="input-group">
           <div class="frame" id="frame-location">
             <label>Локация для тура</label>
@@ -149,13 +149,13 @@
         </div>
 
         <div class="programs-list">
-          <div class="section-list">
-            @for (section of sections; track section.id) {
-              <div class="section-card">
-                <img class="section-icon" [src]="section.icon" [alt]="section.title" />
-                <div class="section-box">
-                  <h2 class="section-title">{{ section.title }}</h2>
-                  <p class="section-description">{{ section.description }}</p>
+          <div class="program-grid">
+            @for (program of programs; track program.id) {
+              <div class="program-card">
+                <img class="program-icon" [src]="program.icon" [alt]="program.title" />
+                <div class="program-box">
+                  <h2 class="program-title">{{ program.title }}</h2>
+                  <p class="program-description">{{ program.description }}</p>
                 </div>
               </div>
             }
@@ -164,41 +164,16 @@
         </div>
       </div>
       <div class="offer-images">
-        <img
-          id="offer-image-coffee"
-          src="./images/coffee.png"
-          alt="cofe"
-          [class.hovered]="hoveredImageId === 0"
-          (mouseenter)="hoveredImageId = 0"
-          (mouseleave)="hoveredImageId = null"
-        />
-
-        <img
-          id="offer-image-men"
-          src="./images/men.png"
-          alt="men"
-          [class.hovered]="hoveredImageId === 1"
-          (mouseenter)="hoveredImageId = 1"
-          (mouseleave)="hoveredImageId = null"
-        />
-
-        <img
-          id="offer-image-moto"
-          src="./images/moto.png"
-          alt="moto"
-          [class.hovered]="hoveredImageId === 2"
-          (mouseenter)="hoveredImageId = 2"
-          (mouseleave)="hoveredImageId = null"
-        />
-
-        <img
-          id="offer-image-valley"
-          src="./images/valley.png"
-          alt="valley"
-          [class.hovered]="hoveredImageId === 3"
-          (mouseenter)="hoveredImageId = 3"
-          (mouseleave)="hoveredImageId = null"
-        />
+        @for (offerImage of offerImages; track offerImage.id) {
+          <img
+            class="offer-images__img"
+            [src]="offerImage.src"
+            [alt]="offerImage.alt"
+            [class.hovered]="hoveredImageId === offerImage.id"
+            (mouseenter)="hoveredImageId = offerImage.id"
+            (mouseleave)="hoveredImageId = null"
+          />
+        }
       </div>
     </div>
   </section>

@@ -330,13 +330,13 @@
   flex-direction: column;
 }
 
-.section-list {
+.program-grid {
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
 }
 
-.section-card {
+.program-card {
   width: 100%;
   min-height: 64px;
   display: flex;
@@ -346,24 +346,24 @@
   box-sizing: border-box;
 }
 
-.section-box {
+.program-box {
   flex-direction: column;
 }
 
-.section-icon {
+.program-icon {
   width: 50px;
   height: 50px;
   flex-shrink: 0;
 }
 
-.section-title {
+.program-title {
   font-size: 18px;
   font-weight: 700;
   line-height: 20px;
   margin: 0;
 }
 
-.section-description {
+.program-description {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
@@ -388,10 +388,11 @@
   column-gap: 10px;
   flex-shrink: 0;
 }
-.offer-images img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+
+:host ::ng-deep .offer-images__img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
   border-radius: 12px;
   border: 2px solid transparent;
   cursor: pointer;
@@ -400,26 +401,28 @@
     border-color 0.25s ease;
 }
 
-@media (max-width: 1180px) {
-  .programs {
-    flex-direction: column;
-    height: auto;
-    padding: 40px 20px;
-  }
-
-  .programs__container,
-  .offer-images {
-    width: 100%;
-    max-width: 580px;
-  }
-
-  .offer-images {
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
+:host ::ng-deep .offer-images__img:hover {
+  transform: scale(1.03) !important;
+  border-color: #f2be22 !important;
 }
 
-.offer-images img.hovered {
+:host ::ng-deep .offer-images__img.hovered {
+  transform: scale(1.03) !important;
+  border-color: #f2be22 !important;
+}
+
+.programs__container,
+.offer-images {
+  width: 100%;
+  max-width: 580px;
+}
+
+.offer-images {
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.offer-images__img.hovered {
   transform: scale(1.03);
   border-color: #f2be22;
 }
@@ -460,7 +463,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #F3F5F4;
+  background-color: #f3f5f4;
 }
 
 .loading-icon {

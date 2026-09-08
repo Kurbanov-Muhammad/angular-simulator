@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import './training';
 import { Color } from '../enums/Color';
 import './collection';
-import { ISection } from './interfaces/ISection';
+import { IProgram } from './interfaces/IProgram';
 import { FormsModule } from '@angular/forms';
+import { IOfferImage } from './interfaces/IOfferImage';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent {
   showClock: boolean = true;
   isLoading: boolean = true;
 
-  sections: ISection[] = [
+  programs: IProgram[] = [
     {
       id: 1,
       icon: './images/people_icon.svg',
@@ -46,6 +47,32 @@ export class AppComponent {
       title: 'Лояльные цены',
       description:
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации',
+    },
+  ];
+
+  offerImages: IOfferImage[] = [
+    {
+      id: 0,
+      src: './images/coffee.png',
+      alt: 'coffee',
+    },
+
+    {
+      id: 1,
+      src: './images/men.png',
+      alt: 'men',
+    },
+
+    {
+      id: 2,
+      src: './images/moto.png',
+      alt: 'moto',
+    },
+
+    {
+      id: 3,
+      src: './images/valley.png',
+      alt: 'valley',
     },
   ];
 
