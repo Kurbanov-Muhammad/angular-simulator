@@ -29,7 +29,7 @@
             <a id="nav-tour-itinerary-link">Программа тура</a>
             <a id="nav-price-link">Стоимость</a>
             <a id="nav-blog-link">Блог</a>
-            <a id="nav-Contacts-link">Контакты</a>
+            <a id="nav-сontacts-link">Контакты</a>
           </nav>
         </div>
         <button class="consultation-button" id="consultation-btn">Консультация</button>
@@ -103,8 +103,8 @@
         </button>
       </form>
     </div>
-    <div class="live-input-demo" id="live-input-field">
-      <input [(ngModel)]="liveInputValue" />
+    <div class="live-input-demo">
+      <input id="live-input-field" [(ngModel)]="liveInputValue" />
       <p>{{ liveInputValue }}</p>
     </div>
   </section>
@@ -119,10 +119,10 @@
         </div>
         <div class="historical-info">
           <span class="about-hike">о нашем походе</span>
-          <h2 class="title-slogan">
+          <h3 class="title-slogan">
             Исследуйте все горные массивы <br />
             мира вместе с нами
-          </h2>
+          </h3>
           <div class="text-info">
             Его корни уходят в один фрагмент классической латыни 45 года <br />
             н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, <br />
@@ -164,14 +164,14 @@
         </div>
       </div>
       <div class="offer-images">
-        @for (offerImage of offerImages; track offerImage.id) {
+        @for (src of offerImages; track $index) {
           <img
             class="offer-images__img"
-            [src]="offerImage.src"
-            [alt]="offerImage.alt"
-            [class.hovered]="hoveredImageId === offerImage.id"
-            (mouseenter)="hoveredImageId = offerImage.id"
-            (mouseleave)="hoveredImageId = null"
+            [src]="src"
+            alt="Галерея программ"
+            [class.hovered]="hoveredImageIndex === $index"
+            (mouseenter)="hoveredImageIndex = $index"
+            (mouseleave)="hoveredImageIndex = null"
           />
         }
       </div>

@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import './training';
-import { Color } from '../enums/Color';
 import './collection';
 import { IProgram } from './interfaces/IProgram';
 import { FormsModule } from '@angular/forms';
-import { IOfferImage } from './interfaces/IOfferImage';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +14,6 @@ export class AppComponent {
 
   companySlogan: string = 'Насладись прогулкой в горах';
   continuationSlogan: string = 'с командой единомышленников';
-  hoveredImageId: number | null = null;
   selectedLocation: string = '';
   selectedDate: string = '';
   participantsCount: string = '';
@@ -25,6 +22,7 @@ export class AppComponent {
   clickCount: number = 0;
   showClock: boolean = true;
   isLoading: boolean = true;
+  hoveredImageIndex: number | null = null;
 
   programs: IProgram[] = [
     {
@@ -50,36 +48,21 @@ export class AppComponent {
     },
   ];
 
-  offerImages: IOfferImage[] = [
-    {
-      id: 0,
-      src: './images/coffee.png',
-      alt: 'coffee',
-    },
-
-    {
-      id: 1,
-      src: './images/men.png',
-      alt: 'men',
-    },
-
-    {
-      id: 2,
-      src: './images/moto.png',
-      alt: 'moto',
-    },
-
-    {
-      id: 3,
-      src: './images/valley.png',
-      alt: 'valley',
-    },
+  offerImages: string[] = [
+    './images/coffee.png',
+    './images/men.png',
+    './images/moto.png',
+    './images/valley.png',
   ];
 
   constructor() {
-    this.saveLastVisitDate();
-    this.incrementVisitCount();
-    this.startClock();
+    localStorage.setItem('lastVisit', new Date().toString());
+    const visitCount: string | null = localStorage.getItem('visitCount');
+    const count: number = Number(visitCount) || 0;
+    localStorage.setItem('visitCount', (count + 1).toString());
+    setInterval(() => {
+      this.currentTime = new Date().toString();
+    }, 1000);
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
@@ -103,26 +86,6 @@ export class AppComponent {
 
   toggleView(): void {
     this.showClock = !this.showClock;
-  }
-
-  private incrementVisitCount(): void {
-    const visitCount: string | null = localStorage.getItem('visitCount');
-    const count: number = Number(visitCount) || 0;
-    localStorage.setItem('visitCount', (count + 1).toString());
-  }
-
-  private isPrimaryColor(color: Color): boolean {
-    return color === Color.RED_COLOR || color === Color.BLUE_COLOR || color === Color.GREEN_COLOR;
-  }
-
-  private saveLastVisitDate(): void {
-    localStorage.setItem('lastVisit', new Date().toString());
-  }
-
-  private startClock(): void {
-    setInterval(() => {
-      this.currentTime = new Date().toString();
-    }, 1000);
   }
 
 }
