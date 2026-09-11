@@ -167,7 +167,7 @@
         @for (src of offerImages; track $index) {
           <img
             class="offer-images__img"
-            [src]="src"
+            [src]="'./images/' + src + '.png'"
             alt="Галерея программ"
             [class.hovered]="hoveredImageIndex === $index"
             (mouseenter)="hoveredImageIndex = $index"

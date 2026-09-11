@@ -48,12 +48,7 @@ export class AppComponent {
     },
   ];
 
-  offerImages: string[] = [
-    './images/coffee.png',
-    './images/men.png',
-    './images/moto.png',
-    './images/valley.png',
-  ];
+  offerImages: string[] = ['coffee', 'men', 'moto', 'valley'];
 
   constructor() {
     localStorage.setItem('lastVisit', new Date().toString());
