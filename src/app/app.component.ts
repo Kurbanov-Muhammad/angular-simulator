@@ -27,21 +27,21 @@ export class AppComponent {
   programs: IProgram[] = [
     {
       id: 1,
-      icon: './images/people_icon.svg',
+      icon: 'people',
       title: 'Опытный гид',
       description:
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
     },
     {
       id: 2,
-      icon: './images/shield_icon.svg',
+      icon: 'shield',
       title: 'Безопасный поход',
       description:
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации',
     },
     {
       id: 3,
-      icon: './images/tag_icon.svg',
+      icon: 'tag',
       title: 'Лояльные цены',
       description:
         'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации',
@@ -69,18 +69,5 @@ export class AppComponent {
     );
   }
 
-  incrementClicks(): void {
-    this.clickCount++;
-  }
-
-  decrementClicks(): void {
-    if (this.clickCount > 0) {
-      this.clickCount--;
-    }
-  }
-
-  toggleView(): void {
-    this.showClock = !this.showClock;
-  }
 
 }

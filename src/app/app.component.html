@@ -7,13 +7,13 @@
     @if (showClock) {
       {{ currentTime }}
     } @else {
-      <button id="increment-count-btn" (click)="incrementClicks()">+</button>
+      <button id="increment-count-btn" (click)="clickCount = clickCount + 1">+</button>
       <span>{{ clickCount }}</span>
-      <button id="decrement-count-btn" (click)="decrementClicks()" [disabled]="clickCount === 0">
+      <button id="decrement-count-btn" (click)="clickCount = clickCount - 1" [disabled]="clickCount === 0">
         -
       </button>
     }
-    <button id="toggle-view-btn" (click)="toggleView()">
+    <button id="toggle-view-btn" (click)="showClock = !showClock">
       {{ showClock ? 'Показать кликер' : 'Показать дату' }}
     </button>
 
@@ -152,7 +152,7 @@
           <div class="program-grid">
             @for (program of programs; track program.id) {
               <div class="program-card">
-                <img class="program-icon" [src]="program.icon" [alt]="program.title" />
+                <img class="program-icon" [src]="'./images/' + program.icon + '_icon.svg'" [alt]="program.title" />
                 <div class="program-box">
                   <h2 class="program-title">{{ program.title }}</h2>
                   <p class="program-description">{{ program.description }}</p>
