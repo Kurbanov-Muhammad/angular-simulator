@@ -1,67 +1,180 @@
-<header class="header">
-  <div class="super-header">
-    <div class="container">
-      <div>
-        <img src="./images/logo_icon.svg" alt="Румтибет">
-      </div>
-      <div>
-        <nav class="navy-wrapper">
-          <a>Главная</a>
-          <a>Про гида</a>
-          <a>Программа тура</a>
-          <a>Стоимость</a>
-          <a>Блог</a>
-          <a>Контакты</a>
-        </nav>
-      </div>
-      <div class="consultation-button">
-        <span>Консультация</span>
+@if (isLoading) {
+  <div class="loader">
+    <img class="loading-icon" src="./images/loader_icon.svg" alt="loader" />
+  </div>
+} @else {
+  <header class="header">
+    @if (showClock) {
+      {{ currentTime }}
+    } @else {
+      <button id="increment-count-btn" (click)="clickCount = clickCount + 1">+</button>
+      <span>{{ clickCount }}</span>
+      <button id="decrement-count-btn" (click)="clickCount = clickCount - 1" [disabled]="clickCount === 0">
+        -
+      </button>
+    }
+    <button id="toggle-view-btn" (click)="showClock = !showClock">
+      {{ showClock ? 'Показать кликер' : 'Показать дату' }}
+    </button>
+
+    <div class="super-header">
+      <div class="container">
+        <div>
+          <img src="./images/logo_icon.svg" alt="Румтибет" />
+        </div>
+        <div>
+          <nav class="navy-wrapper">
+            <a id="nav-home-link">Главная</a>
+            <a id="nav-guide-link">Про гида</a>
+            <a id="nav-tour-itinerary-link">Программа тура</a>
+            <a id="nav-price-link">Стоимость</a>
+            <a id="nav-blog-link">Блог</a>
+            <a id="nav-сontacts-link">Контакты</a>
+          </nav>
+        </div>
+        <button class="consultation-button" id="consultation-btn">Консультация</button>
       </div>
     </div>
-  </div>
-</header>
-<section class="main-header">
-  <div class="banner"></div>
-  <div class="slogan">
-    <span>{{companySlogan}}</span>
-    <span>{{continuationSlogan}}</span>
-  </div>
+  </header>
+  <section class="main-header">
+    <div class="banner"></div>
+    <div class="slogan">
+      <span>{{ companySlogan }}</span>
+      <span>{{ continuationSlogan }}</span>
+    </div>
 
-  <div class="bg-surface">
-    <form class="search-widget">
-      <div class="input-group">
-        <div class="frame">
-          <label>Локация для тура</label>
-          <span class="arrow">▾</span>
-          <select class="hidden-select">
-            <option>Вариант 1</option>
-            <option>Вариант 2</option>
-          </select>
+    <div class="bg-surface">
+      <form class="search-widget" id="tour-search-form">
+        <div class="input-group">
+          <div class="frame" id="frame-location">
+            <label>Локация для тура</label>
+            <span class="arrow">▾</span>
+            <select
+              class="hidden-select"
+              id="location-select"
+              [(ngModel)]="selectedLocation"
+              name="location"
+            >
+              <option>Вариант 1</option>
+              <option>Вариант 2</option>
+            </select>
+          </div>
+          <p class="description">выберите из списка</p>
         </div>
-        <p class="description">выберите из списка</p>
-      </div>
-      <div class="input-group">
-        <div class="frame" onclick="this.querySelector('#trip-date').showPicker();" style="cursor: pointer;">
-          <label for="trip-date">Дата похода</label>
-          <span class="calendar-icon">
-            <img src="./images/calendar_icon.svg" alt="Календарь" width="18" height="18">
-          </span>
-          <input type="date" id="trip-date" class="hidden-select" required>
+        <div class="input-group">
+          <div
+            class="frame"
+            onclick="this.querySelector('#trip-date').showPicker()"
+            style="cursor: pointer"
+          >
+            <label for="trip-date">Дата похода</label>
+            <span class="calendar-icon">
+              <img src="./images/calendar_icon.svg" alt="Календарь" width="18" height="18" />
+            </span>
+            <input
+              type="date"
+              class="hidden-select"
+              id="trip-date"
+              [(ngModel)]="selectedDate"
+              name="date"
+              required
+            />
+          </div>
+          <p class="description">укажите дату</p>
         </div>
-        <p class="description">укажите дату</p>
-      </div>
-      <div class="input-group">
-        <div class="frame">
-          <label>Участники</label>
-          <span class="arrow">▾</span>
-          <select class="hidden-select">
-            <option>Вариант 1</option>
-            <option>Вариант 2</option>
-          </select>
+        <div class="input-group">
+          <div class="frame" id="frame-participants">
+            <label>Участники</label>
+            <span class="arrow">▾</span>
+            <select
+              class="hidden-select"
+              id="participants-select"
+              [(ngModel)]="participantsCount"
+              name="participants"
+            >
+              <option>Вариант 1</option>
+              <option>Вариант 2</option>
+            </select>
+          </div>
+          <p class="description">выберите из списка</p>
         </div>
-        <p class="description">выберите из списка</p>
+        <button type="submit" class="btn-search" id="search-btn" [disabled]="isFormInvalid()">
+          Найти программу
+        </button>
+      </form>
+    </div>
+    <div class="live-input-demo">
+      <input id="live-input-field" [(ngModel)]="liveInputValue" />
+      <p>{{ liveInputValue }}</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="content">
+      <div class="container-info">
+        <div class="hike-overview">
+          <img class="mountains_pik_icon" src="./images/mountains_pik.png" alt="pik" />
+          <img class="house_icon" src="./images/house.png" alt="house" />
+          <img class="play_icon" src="./images/play_icon.svg" alt="play" />
+        </div>
+        <div class="historical-info">
+          <span class="about-hike">о нашем походе</span>
+          <h3 class="title-slogan">
+            Исследуйте все горные массивы <br />
+            мира вместе с нами
+          </h3>
+          <div class="text-info">
+            Его корни уходят в один фрагмент классической латыни 45 года <br />
+            н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, <br />
+            профессор латыни из колледжа Hampden-Sydney, штат <br />
+            Вирджиния, взял одно из самых странных слов в Lorem Ipsum, <br />
+            "consectetur" и занялся его поисками в классической латинской <br />
+            литературе.
+          </div>
+          <button class="program-btn" id="tour-program-btn">Программа тура</button>
+        </div>
       </div>
-      <button type="submit" class="btn-search">Найти программу</button>
-    </form>
-  </div>
-</section>
+    </div>
+  </section>
+
+  <section>
+    <div class="programs">
+      <div class="programs__container">
+        <span class="programs__subtitle">наше предложение</span>
+        <h2 class="programs__title">Лучшие программы для тебя</h2>
+        <div class="programs__description">
+          Его корни уходят в один фрагмент классической латыни 45 года <br />
+          н.э., то есть более двух тысячелетий назад. Ричард МакКлинток, <br />
+          профессор латыни из колледжа.
+        </div>
+
+        <div class="programs-list">
+          <div class="program-grid">
+            @for (program of programs; track program.id) {
+              <div class="program-card">
+                <img class="program-icon" [src]="'./images/' + program.icon + '_icon.svg'" [alt]="program.title" />
+                <div class="program-box">
+                  <h2 class="program-title">{{ program.title }}</h2>
+                  <p class="program-description">{{ program.description }}</p>
+                </div>
+              </div>
+            }
+          </div>
+          <button class="programs-btn" id="pricing-btn">Стоимость программы</button>
+        </div>
+      </div>
+      <div class="offer-images">
+        @for (src of offerImages; track $index) {
+          <img
+            class="offer-images__img"
+            [src]="'./images/' + src + '.png'"
+            alt="Галерея программ"
+            [class.hovered]="hoveredImageIndex === $index"
+            (mouseenter)="hoveredImageIndex = $index"
+            (mouseleave)="hoveredImageIndex = null"
+          />
+        }
+      </div>
+    </div>
+  </section>
+}
