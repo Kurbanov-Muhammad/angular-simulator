@@ -20,14 +20,14 @@ export class MessageService {
       text: text,
       type: type,
     };
-    this.messages.unshift(newMessage);
+    this.messages = [newMessage, ...this.messages];
     setTimeout(() => {
-      this.closeMessage(newId)
+      this.closeMessage(newId);
     }, 5000);
   }
 
   closeMessage(id: number): void {
-    this.messages = this.messages.filter((msg) => msg.id !== id);
+    this.messages = this.messages.filter((msg: IMessage) => msg.id !== id);
   }
 
 }

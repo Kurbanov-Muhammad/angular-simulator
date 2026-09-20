@@ -10,7 +10,7 @@ export class StorageService {
   }
 
   getItem<T>(key: string): T {
-    const rawValue = localStorage.getItem(key);
+    const rawValue: string | null = localStorage.getItem(key);
     return JSON.parse(rawValue ?? 'null');
   }
 

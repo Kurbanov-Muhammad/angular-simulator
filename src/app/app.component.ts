@@ -99,9 +99,12 @@ export class AppComponent {
     const visitCount: number = this.storageService.getItem<number>('visitCount');
     const count: number = Number(visitCount) || 0;
     this.storageService.setItem('visitCount', count + 1);
+
+
     setInterval(() => {
       this.currentTime = new Date().toString();
     }, 1000);
+
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
