@@ -96,9 +96,9 @@ export class AppComponent {
 
   constructor(public messageService: MessageService, private storageService: StorageService) {
     this.storageService.setItem('lastVisit', new Date());
-    const visitCount = this.storageService.getItem<number>('visitCount');
+    const visitCount: number = this.storageService.getItem<number>('visitCount');
     const count: number = Number(visitCount) || 0;
-    this.storageService.setItem('visitCount', (count + 1));
+    this.storageService.setItem('visitCount', count + 1);
     setInterval(() => {
       this.currentTime = new Date().toString();
     }, 1000);
@@ -114,8 +114,7 @@ export class AppComponent {
   }
 
   showMessage(type: MessageType): void {
-    this.messageService.addMessage('Message Content', type );
+    this.messageService.addMessage('Message Content', type);
   }
-
 
 }

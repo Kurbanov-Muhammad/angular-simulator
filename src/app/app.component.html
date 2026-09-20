@@ -220,7 +220,7 @@
               </div>
               <div class="blog_photo_date">
                 <span class="blog_date">{{ blog.date }}</span>
-                <a class="blog_link" href="#">{{ blog.button }}</a>
+                <a class="blog_link" [attr.id]="'blog-link-' + blog.id" href="#">{{ blog.button }}</a>
               </div>
             </div>
           </div>
@@ -250,7 +250,7 @@
         <h2>{{ message.type }}</h2>
         <p>{{ message.text }}</p>
       </div>
-      <button (click)="messageService.closeMessage(message.id)">
+      <button [attr.id]="'message-' + message.id" (click)="messageService.closeMessage(message.id)">
         <img src="./images/delete-icon.svg" alt="Удалить" />
       </button>
     </div>

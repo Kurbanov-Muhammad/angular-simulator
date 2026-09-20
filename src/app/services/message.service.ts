@@ -6,14 +6,15 @@ import { IMessage } from '../interfaces/IMessage';
   providedIn: 'root',
 })
 export class MessageService {
+
   private messages: IMessage[] = [];
 
   get allMessages(): IMessage[] {
     return this.messages;
   }
 
-  addMessage(text: string, type: MessageType) {
-    const newId = Date.now();
+  addMessage(text: string, type: MessageType): void {
+    const newId: number = Date.now();
     const newMessage: IMessage = {
       id: newId,
       text: text,
@@ -24,8 +25,10 @@ export class MessageService {
       this.closeMessage(newId)
     }, 5000);
   }
-  closeMessage(id: number) {
+
+  closeMessage(id: number): void {
     this.messages = this.messages.filter((msg) => msg.id !== id);
   }
+
 }
 
