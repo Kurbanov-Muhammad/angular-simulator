@@ -28,7 +28,7 @@ export class AppComponent {
   showClock: boolean = true;
   isLoading: boolean = true;
   hoveredImageIndex: number | null = null;
-  MessageType = MessageType;
+  MessageType: typeof MessageType = MessageType;
 
   programs: IProgram[] = [
     {
