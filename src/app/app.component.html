@@ -23,10 +23,10 @@
 
     <div class="super-header">
       <div class="container">
-        <div>
+        <div class="logo-wrapper">
           <img src="./images/logo_icon.svg" alt="Румтибет" />
         </div>
-        <div>
+        <div class="nav-wrapper">
           <nav class="navy-wrapper">
             <a id="nav-home-link">Главная</a>
             <a id="nav-guide-link">Про гида</a>
@@ -114,7 +114,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="content-section">
     <div class="content">
       <div class="container-info">
         <div class="hike-overview">
@@ -142,7 +142,7 @@
     </div>
   </section>
 
-  <section>
+  <section class="programs-section">
     <div class="programs">
       <div class="programs__container">
         <span class="programs__subtitle">наше предложение</span>
@@ -222,9 +222,7 @@
               </div>
               <div class="blog_photo_date">
                 <span class="blog_date">{{ blog.date }}</span>
-                <a class="blog_link" [attr.id]="'blog-link-' + blog.id" href="#">{{
-                  blog.button
-                }}</a>
+                <a class="blog_link" [attr.id]="'blog-link-' + blog.id" href="#">{{blog.button}}</a>
               </div>
             </div>
           </div>
@@ -232,11 +230,15 @@
       </div>
     </div>
   </section>
-  <section>
+  <section class="message-section">
     <div class="message-btn">
-      <button id="show-success-btn" (click)="showMessage(MessageType.SUCCESS)">Показать Success</button>
+      <button id="show-success-btn" (click)="showMessage(MessageType.SUCCESS)">
+        Показать Success
+      </button>
       <button id="show-error-btn" (click)="showMessage(MessageType.ERROR)">Показать Error</button>
-      <button id="show-warning-btn" (click)="showMessage(MessageType.WARNING)">Показать Warning</button>
+      <button id="show-warning-btn" (click)="showMessage(MessageType.WARNING)">
+        Показать Warning
+      </button>
       <button id="show-info-btn" (click)="showMessage(MessageType.INFO)">Показать Info</button>
     </div>
     <div class="toast-container">
@@ -250,7 +252,7 @@
   <ng-template #toastTemplate let-message>
     <div class="toast" [ngClass]="'toast--' + message.type.toLowerCase()">
       <img src="./images/mail-icon.svg" alt="Письмо" />
-      <div>
+      <div class="toast-content">
         <h2>{{ message.type }}</h2>
         <p>{{ message.text }}</p>
       </div>
