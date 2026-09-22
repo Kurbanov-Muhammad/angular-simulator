@@ -59,8 +59,8 @@
               [(ngModel)]="selectedLocation"
               name="location"
             >
-              <option>Вариант 1</option>
-              <option>Вариант 2</option>
+              <option id="location-option-1">Вариант 1</option>
+              <option id="location-option-2">Вариант 2</option>
             </select>
           </div>
           <p class="description">выберите из списка</p>
@@ -68,6 +68,7 @@
         <div class="input-group">
           <div
             class="frame"
+            id="trip-date-frame"
             onclick="this.querySelector('#trip-date').showPicker()"
             style="cursor: pointer"
           >
@@ -96,8 +97,8 @@
               [(ngModel)]="participantsCount"
               name="participants"
             >
-              <option>Вариант 1</option>
-              <option>Вариант 2</option>
+              <option id="participants-option-1">Вариант 1</option>
+              <option id="participants-option-2">Вариант 2</option>
             </select>
           </div>
           <p class="description">выберите из списка</p>
@@ -175,6 +176,7 @@
         @for (src of offerImages; track $index) {
           <img
             class="offer-images__img"
+            [attr.id]="'offer-image-' + $index"
             [src]="'./images/' + src + '.png'"
             alt="Галерея программ"
             [class.hovered]="hoveredImageIndex === $index"
@@ -220,7 +222,9 @@
               </div>
               <div class="blog_photo_date">
                 <span class="blog_date">{{ blog.date }}</span>
-                <a class="blog_link" [attr.id]="'blog-link-' + blog.id" href="#">{{ blog.button }}</a>
+                <a class="blog_link" [attr.id]="'blog-link-' + blog.id" href="#">{{
+                  blog.button
+                }}</a>
               </div>
             </div>
           </div>
@@ -230,10 +234,10 @@
   </section>
   <section>
     <div class="message-btn">
-      <button id="show-success-btn" (click)="showMessage(MessageType.Success)">Показать Success</button>
-      <button id="show-error-btn" (click)="showMessage(MessageType.Error)">Показать Error</button>
-      <button id="show-warning-btn" (click)="showMessage(MessageType.Warning)">Показать Warning</button>
-      <button id="show-info-btn" (click)="showMessage(MessageType.Info)">Показать Info</button>
+      <button id="show-success-btn" (click)="showMessage(MessageType.SUCCESS)">Показать Success</button>
+      <button id="show-error-btn" (click)="showMessage(MessageType.ERROR)">Показать Error</button>
+      <button id="show-warning-btn" (click)="showMessage(MessageType.WARNING)">Показать Warning</button>
+      <button id="show-info-btn" (click)="showMessage(MessageType.INFO)">Показать Info</button>
     </div>
     <div class="toast-container">
       @for (message of messageService.allMessages; track message.id) {
