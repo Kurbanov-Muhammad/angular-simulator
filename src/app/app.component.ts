@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import './training';
 import './collection';
 import { IProgram } from './interfaces/IProgram';
@@ -15,7 +15,11 @@ import { StorageService } from './services/storage.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
+
 export class AppComponent {
+
+  messageService: MessageService = inject(MessageService);
+  private storageService: StorageService = inject(StorageService);
 
   companySlogan: string = 'Насладись прогулкой в горах';
   continuationSlogan: string = 'с командой единомышленников';
@@ -94,7 +98,7 @@ export class AppComponent {
   offerImages: string[] = ['coffee', 'men', 'moto', 'valley'];
   priceCard: string[] = ['lake', 'starry_sky', 'stone'];
 
-  constructor(public messageService: MessageService, private storageService: StorageService) {
+  constructor() {
     this.storageService.setItem('lastVisit', new Date());
     const visitCount: number = this.storageService.getItem<number>('visitCount');
     const count: number = Number(visitCount) || 0;
