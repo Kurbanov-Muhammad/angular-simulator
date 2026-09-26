@@ -1,16 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import './training';
 import './collection';
 import { IProgram } from './interfaces/IProgram';
 import { FormsModule } from '@angular/forms';
+import { IBlog } from './interfaces/IBlog';
+import { MessageType } from '../enums/message-type';
+import { MessageService } from './services/message.service';
+import { NgTemplateOutlet, NgClass } from '@angular/common';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
-  imports: [FormsModule],
+  imports: [FormsModule, NgTemplateOutlet, NgClass],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
+
 export class AppComponent {
+
+  messageService: MessageService = inject(MessageService);
+  private storageService: StorageService = inject(StorageService);
 
   companySlogan: string = 'Насладись прогулкой в горах';
   continuationSlogan: string = 'с командой единомышленников';
@@ -23,6 +32,7 @@ export class AppComponent {
   showClock: boolean = true;
   isLoading: boolean = true;
   hoveredImageIndex: number | null = null;
+  MessageType: typeof MessageType = MessageType;
 
   programs: IProgram[] = [
     {
@@ -48,16 +58,57 @@ export class AppComponent {
     },
   ];
 
+  blogs: IBlog[] = [
+    {
+      id: 1,
+      icon: 'italia',
+      title: 'Красивая Италя, какая она в реальности?',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
+      date: '01/04/2023',
+      button: 'читать статью',
+    },
+    {
+      id: 2,
+      icon: 'fly',
+      title: 'Долой сомнения! Весь мир открыт для вас!',
+      description:
+        'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации ... независимые способы реализации соответствующих...',
+      date: '01/04/2023',
+      button: 'читать статью',
+    },
+    {
+      id: 3,
+      icon: 'street',
+      title: 'Как подготовиться к путешествию в одиночку? ',
+      description: 'Для современного мира базовый вектор развития предполагает.',
+      date: '01/04/2023',
+      button: 'читать статью',
+    },
+    {
+      id: 4,
+      icon: 'india',
+      title: 'Индия ... летим?',
+      description: 'Для современного мира базовый.',
+      date: '01/04/2023',
+      button: 'читать статью',
+    },
+  ];
+
   offerImages: string[] = ['coffee', 'men', 'moto', 'valley'];
+  priceCard: string[] = ['lake', 'starry_sky', 'stone'];
 
   constructor() {
-    localStorage.setItem('lastVisit', new Date().toString());
-    const visitCount: string | null = localStorage.getItem('visitCount');
+    this.storageService.setItem('lastVisit', new Date());
+    const visitCount: number = this.storageService.getItem<number>('visitCount');
     const count: number = Number(visitCount) || 0;
-    localStorage.setItem('visitCount', (count + 1).toString());
+    this.storageService.setItem('visitCount', count + 1);
+
+
     setInterval(() => {
       this.currentTime = new Date().toString();
     }, 1000);
+
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
@@ -69,5 +120,8 @@ export class AppComponent {
     );
   }
 
+  showMessage(type: MessageType): void {
+    this.messageService.addMessage('Message Content', type);
+  }
 
 }
