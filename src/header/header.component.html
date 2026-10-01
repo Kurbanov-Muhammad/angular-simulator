@@ -1,0 +1,41 @@
+<header class="header">
+  @if (showClock) {
+    {{ currentTime }}
+  } @else {
+    <button id="increment-count-btn" (click)="clickCount = clickCount + 1">+</button>
+    <span>{{ clickCount }}</span>
+    <button
+      id="decrement-count-btn"
+      (click)="clickCount = clickCount - 1"
+      [disabled]="clickCount === 0"
+    >
+      -
+    </button>
+  }
+  <button id="toggle-view-btn" (click)="showClock = !showClock">
+    {{ showClock ? 'Показать кликер' : 'Показать дату' }}
+  </button>
+
+  <div class="super-header">
+    <div class="container">
+      <div class="logo-wrapper">
+        <img src="./images/logo_icon.svg" alt="Румтибет" />
+      </div>
+      <div class="nav-wrapper">
+        <nav class="navy-wrapper">
+          @for (navLink of navLinks; track navLink.id) {
+            <a
+              [routerLink]="navLink.link"
+              routerLinkActive="active-link"
+              [routerLinkActiveOptions]="{ exact: true }"
+              [id]="'nav-link-' + navLink.id"
+            >
+              {{ navLink.name }}
+            </a>
+          }
+        </nav>
+      </div>
+      <button class="consultation-button" id="consultation-btn">Консультация</button>
+    </div>
+  </div>
+</header>
