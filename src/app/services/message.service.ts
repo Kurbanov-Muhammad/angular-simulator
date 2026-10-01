@@ -9,8 +9,8 @@ export class MessageService {
 
   private messages: IMessage[] = [];
 
-  get allMessages(): IMessage[] {
-    return this.messages;
+  getMessages(): IMessage[] {
+    return [...this.messages];
   }
 
   showSuccess(text: string): void {

@@ -84,6 +84,10 @@
   padding: 10px 14px;
   box-sizing: border-box;
 
+.frame-clickable {
+  cursor: pointer;
+}
+
   label {
     font-size: 16px;
     font-weight: 700;

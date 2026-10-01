@@ -94,4 +94,8 @@ export class HomePageComponent {
     );
   }
 
+  openDatePicker(input: HTMLInputElement): void {
+    input.showPicker();
+  }
+
 }
