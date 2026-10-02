@@ -10,7 +10,7 @@ export class MessageService {
   private messages: IMessage[] = [];
 
   getMessages(): IMessage[] {
-    return [...this.messages];
+    return this.messages;
   }
 
   showSuccess(text: string): void {
