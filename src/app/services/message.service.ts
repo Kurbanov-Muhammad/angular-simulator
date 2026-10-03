@@ -9,26 +9,42 @@ export class MessageService {
 
   private messages: IMessage[] = [];
 
-  get allMessages(): IMessage[] {
+  getMessages(): IMessage[] {
     return this.messages;
   }
 
-  addMessage(text: string, type: MessageType): void {
-    const newId: number = Date.now();
-    const newMessage: IMessage = {
-      id: newId,
-      text: text,
-      type: type,
-    };
-    this.messages = [newMessage, ...this.messages];
-    setTimeout(() => {
-      this.closeMessage(newId);
-    }, 5000);
+  showSuccess(text: string): void {
+    this.addMessage(text, MessageType.SUCCESS);
+  }
+
+  showError(text: string): void {
+    this.addMessage(text, MessageType.ERROR);
+  }
+
+  showWarn(text: string): void {
+    this.addMessage(text, MessageType.WARNING);
+  }
+
+  showInfo(text: string): void {
+    this.addMessage(text, MessageType.INFO);
   }
 
   closeMessage(id: number): void {
     this.messages = this.messages.filter((msg: IMessage) => msg.id !== id);
   }
 
-}
+  private addMessage(text: string, type: MessageType): void {
+    const newId: number = Date.now();
+    const newMessage: IMessage = {
+      id: newId,
+      text: text,
+      type: type,
+    };
 
+    this.messages = [newMessage, ...this.messages];
+    setTimeout(() => {
+      this.closeMessage(newId);
+    }, 5000);
+  }
+
+}
