@@ -1,9 +1,9 @@
 <header class="header">
   @if (showClock) {
-    {{ currentTime }}
+    <span class="current_time">{{ currentTime }}</span>
   } @else {
     <button id="increment-count-btn" (click)="clickCount = clickCount + 1">+</button>
-    <span>{{ clickCount }}</span>
+    <span class="click_count">{{ clickCount }}</span>
     <button
       id="decrement-count-btn"
       (click)="clickCount = clickCount - 1"

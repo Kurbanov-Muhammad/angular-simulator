@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
-import './training';
-import './collection';
 import { StorageService } from './services/storage.service';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
 import { MessageComponent } from '../message/message.component';
- 
+import { LoaderComponent } from '../loader/loader.component';
+
+
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, MessageComponent],
+  imports: [RouterOutlet, FooterComponent, HeaderComponent, MessageComponent, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

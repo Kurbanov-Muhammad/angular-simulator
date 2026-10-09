@@ -84,9 +84,9 @@
   padding: 10px 14px;
   box-sizing: border-box;
 
-.frame-clickable {
-  cursor: pointer;
-}
+  .frame-clickable {
+    cursor: pointer;
+  }
 
   label {
     font-size: 16px;
@@ -683,8 +683,10 @@
 
 .message_service_btn {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-left: 20px;
+  padding-top: 150px;
 }
 
 .success_btn,

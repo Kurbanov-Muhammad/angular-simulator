@@ -63,3 +63,38 @@
 .navy-wrapper a {
   color: black;
 }
+
+#toggle-view-btn {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-left: 10px;
+}
+
+#increment-count-btn {
+  margin-left: 20px;
+}
+#decrement-count-btn {
+  margin-left: 10px;
+}
+
+#increment-count-btn,
+#decrement-count-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-right: 10px;
+}
+
+.current_time {
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.click_count {
+  font-size: 30px;
+}
