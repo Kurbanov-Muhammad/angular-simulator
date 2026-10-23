@@ -1,6 +1,20 @@
-import { Component, Output, EventEmitter, } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { IUser } from '../app/interfaces/IUser';
+
+type UserFormValue = Omit<IUser, 'id'>;
+
+type ControlsOf<T> = {
+  [K in keyof T]: T[K] extends object ? FormGroup<ControlsOf<T[K]>> : FormControl<T[K]>;
+};
+
+type UserFormControls = ControlsOf<UserFormValue>;
 
 @Component({
   selector: 'app-user-create',
@@ -9,56 +23,60 @@ import { IUser } from '../app/interfaces/IUser';
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
-
   @Output() createUser = new EventEmitter<IUser>();
 
-  userForm: FormGroup = new FormGroup({
-    name: new FormControl('', [
+  private readonly formBuilder = inject(NonNullableFormBuilder);
+
+  userForm = this.formBuilder.group<UserFormControls>({
+    name: this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(2),
       Validators.maxLength(100),
     ]),
-    username: new FormControl('', [
+    username: this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(30),
     ]),
-    email: new FormControl('', [
+    email: this.formBuilder.control('', [
       Validators.required,
       Validators.email,
-      Validators.maxLength(100)
+      Validators.maxLength(100),
     ]),
-    phone: new FormControl('', [
+    phone: this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(10),
       Validators.maxLength(25),
     ]),
-    website: new FormControl('', [Validators.maxLength(100)]),
-    address: new FormGroup({
-      street: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      suite: new FormControl('', [Validators.maxLength(50)]),
-      city: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      zipcode: new FormControl('', [
+    website: this.formBuilder.control('', [Validators.maxLength(100)]),
+    address: this.formBuilder.group({
+      street: this.formBuilder.control('', [Validators.required, Validators.maxLength(100)]),
+      suite: this.formBuilder.control('', [Validators.maxLength(50)]),
+      city: this.formBuilder.control('', [Validators.required, Validators.maxLength(50)]),
+      zipcode: this.formBuilder.control('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(10),
       ]),
-      geo: new FormGroup({
-        lat: new FormControl('', [Validators.required]),
-        lng: new FormControl('', [Validators.required]),
+      geo: this.formBuilder.group({
+        lat: this.formBuilder.control('', [Validators.required]),
+        lng: this.formBuilder.control('', [Validators.required]),
       }),
     }),
-    company: new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      catchPhrase: new FormControl('', [Validators.maxLength(200)]),
-      bs: new FormControl('', [Validators.maxLength(100)]),
+    company: this.formBuilder.group({
+      name: this.formBuilder.control('', [Validators.required, Validators.maxLength(50)]),
+      catchPhrase: this.formBuilder.control('', [Validators.maxLength(200)]),
+      bs: this.formBuilder.control('', [Validators.maxLength(100)]),
     }),
   });
 
   onSubmit(): void {
-    const newUser:IUser = {...this.userForm.value, id: Date.now()};
+    const newUser: IUser = {
+      ...this.userForm.getRawValue(),
+      id: Date.now(),
+    };
+
     this.createUser.emit(newUser);
     this.userForm.reset();
   }
-
 }

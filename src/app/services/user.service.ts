@@ -10,19 +10,20 @@ import { StorageService } from './storage.service';
 @Injectable({
   providedIn: 'root',
 })
+
 export class UserService {
 
   private userApiService: UserApiService = inject(UserApiService);
   private messageService: MessageService = inject(MessageService);
   private loaderService: LoaderService = inject(LoaderService);
   private storageService: StorageService = inject(StorageService);
-  private userStorageKey: string = 'users';
+  private USER_STORAGE_KEY: string = 'users';
   private usersSubject: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
   users$: Observable<IUser[]> = this.usersSubject.asObservable();
 
   setUsers(users: IUser[]): void {
     this.usersSubject.next(users);
-    this.storageService.setItem<IUser[]>(this.userStorageKey, users);
+    this.storageService.setItem<IUser[]>(this.USER_STORAGE_KEY, users);
   }
 
   getUsers(): Observable<IUser[]> {
@@ -31,8 +32,10 @@ export class UserService {
 
   loadUsers(): Observable<IUser[]> {
     return defer(() => {
-      const savedUsers:IUser[]|null = this.storageService.getItem<IUser[]|null>(this.userStorageKey);
-      if(savedUsers !== null) {
+      const savedUsers: IUser[] | null = this.storageService.getItem<IUser[] | null>(
+        this.USER_STORAGE_KEY,
+      );
+      if (savedUsers !== null) {
         return of(savedUsers);
       }
       this.loaderService.showLoader();
