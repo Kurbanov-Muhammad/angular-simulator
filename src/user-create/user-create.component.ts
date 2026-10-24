@@ -23,11 +23,12 @@ type UserFormControls = ControlsOf<UserFormValue>;
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
+
+  private formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
+
   @Output() createUser = new EventEmitter<IUser>();
 
-  private readonly formBuilder = inject(NonNullableFormBuilder);
-
-  userForm = this.formBuilder.group<UserFormControls>({
+  userForm: FormGroup<UserFormControls> = this.formBuilder.group<UserFormControls>({
     name: this.formBuilder.control('', [
       Validators.required,
       Validators.minLength(2),
@@ -79,4 +80,5 @@ export class UserCreateComponent {
     this.createUser.emit(newUser);
     this.userForm.reset();
   }
+
 }

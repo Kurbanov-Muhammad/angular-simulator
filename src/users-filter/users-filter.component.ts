@@ -11,17 +11,21 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class UsersFilterComponent {
 
+  private destroyRef: DestroyRef = inject(DestroyRef);
+
   @Output() searchChange = new EventEmitter<string>();
 
-  private destroyRef: DestroyRef = inject(DestroyRef);
   searchControl: FormControl = new FormControl('');
 
   constructor() {
-    this.searchControl.valueChanges
-      .pipe(debounceTime(200), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+    this.searchControl.valueChanges.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef)
+    )
       .subscribe((value: string) => {
         this.searchChange.emit(value);
-      });
+    });
   }
 
 }
