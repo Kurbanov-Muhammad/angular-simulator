@@ -13,7 +13,7 @@ export class UsersFilterComponent {
 
   private destroyRef: DestroyRef = inject(DestroyRef);
 
-  @Output() searchChange = new EventEmitter<string>();
+  @Output() searchChange: EventEmitter<string> = new EventEmitter<string>();
 
   searchControl: FormControl = new FormControl('');
 

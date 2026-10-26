@@ -26,7 +26,7 @@ export class UserCreateComponent {
 
   private formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
 
-  @Output() createUser = new EventEmitter<IUser>();
+  @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
 
   userForm: FormGroup<UserFormControls> = this.formBuilder.group<UserFormControls>({
     name: this.formBuilder.control('', [
