@@ -14,24 +14,20 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
   styleUrl: './users-page.component.scss',
 })
 export class UsersPageComponent {
-
   private userService: UserService = inject(UserService);
   private searchSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   users$: Observable<IUser[]> = this.userService.users$;
   filteredUsers$: Observable<IUser[]> = combineLatest([this.users$, this.searchSubject]).pipe(
     map(([users, search]: [IUser[], string]) => {
-      const processedSearchText: string = search.toLowerCase()
-        .trim();
+      const processedSearchText: string = search.toLowerCase().trim();
       return users.filter((user: IUser) => {
-        return user.name.toLowerCase()
-          .includes(processedSearchText);
+        return user.name.toLowerCase().includes(processedSearchText);
       });
     }),
   );
 
   constructor() {
-    this.userService.loadUsers()
-      .subscribe();
+    this.userService.loadUsers().subscribe();
   }
 
   onDeleteUser(id: number): void {
@@ -45,5 +41,4 @@ export class UsersPageComponent {
   onSearchChange(value: string): void {
     this.searchSubject.next(value);
   }
-
 }

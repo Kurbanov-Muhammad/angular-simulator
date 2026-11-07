@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { RouterOutlet } from '@angular/router';
 import { MessageComponent } from '../message/message.component';
 import { LoaderComponent } from '../loader/loader.component';
+import { ThemeService } from './services/theme.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ import { LoaderComponent } from '../loader/loader.component';
 
 export class AppComponent {
 
+  private themeService: ThemeService = inject(ThemeService);
   private storageService: StorageService = inject(StorageService);
 
   constructor() {

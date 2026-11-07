@@ -23,7 +23,6 @@ type UserFormControls = ControlsOf<UserFormValue>;
   styleUrl: './user-create.component.scss',
 })
 export class UserCreateComponent {
-
   private formBuilder: NonNullableFormBuilder = inject(NonNullableFormBuilder);
 
   @Output() createUser: EventEmitter<IUser> = new EventEmitter<IUser>();
@@ -80,5 +79,4 @@ export class UserCreateComponent {
     this.createUser.emit(newUser);
     this.userForm.reset();
   }
-
 }

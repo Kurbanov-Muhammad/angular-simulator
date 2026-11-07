@@ -3,16 +3,12 @@ import { MessageType } from '../../enums/message-type';
 import { IMessage } from '../interfaces/IMessage';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class MessageService {
-
   private messagesSubject: BehaviorSubject<IMessage[]> = new BehaviorSubject<IMessage[]>([]);
   messages$: Observable<IMessage[]> = this.messagesSubject.asObservable();
-
-
 
   showSuccess(text: string): void {
     this.addMessage(text, MessageType.SUCCESS);
@@ -47,5 +43,4 @@ export class MessageService {
       this.closeMessage(newId);
     }, 5000);
   }
-
 }
