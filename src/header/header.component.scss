@@ -65,10 +65,10 @@
 }
 
 #toggle-view-btn {
-  width: 150px;
-  height: 50px;
+  width: 100px;
+  height: 30px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 10px;
   font-weight: 800;
   margin-left: 10px;
 }
@@ -82,8 +82,8 @@
 
 #increment-count-btn,
 #decrement-count-btn {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   border-radius: 10px;
   font-size: 18px;
   font-weight: 800;
@@ -91,21 +91,46 @@
 }
 
 .current_time {
-  font-size: 30px;
+  font-size: 20px;
   margin-left: 20px;
 }
 
 .click_count {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .theme-mode {
-  display: flex;
-  justify-content: right;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .moon-icon,
 .sun-icon {
   font-size: 25px;
   margin-right: 5px;
+}
+
+.color-mode-toggle {
+  --p-toggleswitch-background: var(--text-color);
+  --p-toggleswitch-hover-background: var(--text-color);
+  --p-toggleswitch-checked-background: var(--text-color);
+  --p-toggleswitch-handle-background: var(--white-color);
+  --p-toggleswitch-handle-hover-background: var(--white-color);
+  --p-toggleswitch-handle-checked-background: var(--white-color);
+  --p-toggleswitch-handle-checked-hover-background: var(--white-color);
+}
+
+:host-context([data-color-mode='dark']) .color-mode-toggle {
+  --p-toggleswitch-background: var(--white-color);
+  --p-toggleswitch-hover-background: var(--white-color);
+  --p-toggleswitch-checked-background: var(--white-color);
+  --p-toggleswitch-handle-background: var(--text-color);
+  --p-toggleswitch-handle-hover-background: var(--text-color);
+  --p-toggleswitch-handle-checked-background: var(--text-color);
+  --p-toggleswitch-handle-checked-hover-background: var(--text-color)
+}
+
+.theme-select-button {
+  margin-left: 20px;
 }

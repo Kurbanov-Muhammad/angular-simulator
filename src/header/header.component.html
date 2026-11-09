@@ -29,6 +29,14 @@
           id="color-mode-toggle"
           (onChange)="onToggleColorMode()"
         />
+        <p-selectbutton
+          class="theme-select-button"
+          id="theme-select-button"
+          [options]="themeOptions"
+          [ngModel]="state.theme"
+          [allowEmpty]="false"
+          (onChange)="onChangeTheme($event)"
+        />
       </div>
     }
   </div>

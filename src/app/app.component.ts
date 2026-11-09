@@ -7,7 +7,6 @@ import { MessageComponent } from '../message/message.component';
 import { LoaderComponent } from '../loader/loader.component';
 import { ThemeService } from './services/theme.service';
 
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, FooterComponent, HeaderComponent, MessageComponent, LoaderComponent],

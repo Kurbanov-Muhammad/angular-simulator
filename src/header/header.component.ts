@@ -8,12 +8,38 @@ import { ColorMode } from '../enums/ColorMode';
 import { ToggleSwitchModule } from 'primeng/toggleswitch';
 import { FormsModule } from '@angular/forms';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule, } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutton';
+import { IThemeOption } from '../app/interfaces/IThemeOption';
+import { Theme } from '../enums/Theme';
+
+const THEME_OPTIONS: IThemeOption[] = [
+  {
+    label: 'Aura',
+    value: Theme.AURA,
+  },
+  {
+    label: 'Lara',
+    value: Theme.LARA,
+  },
+  {
+    label: 'Nora',
+    value: Theme.NORA,
+  },
+];
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, AsyncPipe, ToggleSwitchModule, FormsModule, FontAwesomeModule],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    AsyncPipe,
+    ToggleSwitchModule,
+    FormsModule,
+    FontAwesomeModule,
+    SelectButtonModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -26,6 +52,7 @@ export class HeaderComponent {
 
   sunIcon: IconDefinition = faSun;
   moonIcon: IconDefinition = faMoon;
+  themeOptions: IThemeOption[] = THEME_OPTIONS;
 
   themeState$: Observable<ThemeState> = this.themeService.themeState$;
   colorModes: typeof ColorMode = ColorMode;
@@ -51,6 +78,10 @@ export class HeaderComponent {
 
   onToggleColorMode(): void {
     this.themeService.toggleColorMode();
+  }
+
+  onChangeTheme(event: SelectButtonChangeEvent): void {
+    this.themeService.setTheme(event.value);
   }
 
 }
