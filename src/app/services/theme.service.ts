@@ -13,21 +13,23 @@ export interface ThemeState {
   colorMode: ColorMode;
 }
 
-const DEFAULT_THEME_STATE: ThemeState = {
-  theme: Theme.AURA,
-  colorMode: ColorMode.LIGHT,
-};
 const THEME_STATE_STORAGE_KEY: string = 'theme-state';
-const THEME_PRESETS: Record<Theme, typeof Aura> = {
-  [Theme.AURA]: Aura,
-  [Theme.NORA]: Nora,
-  [Theme.LARA]: Lara,
-};
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
+
+  private defaultThemeState: ThemeState = {
+    theme: Theme.AURA,
+    colorMode: ColorMode.LIGHT
+  };
+
+  private themePresets: Record<Theme, typeof Aura> = {
+    [Theme.AURA]: Aura,
+    [Theme.NORA]: Nora,
+    [Theme.LARA]: Lara,
+  };
 
   private primeng: PrimeNG = inject(PrimeNG);
   private document: Document = inject(DOCUMENT);
@@ -42,7 +44,7 @@ export class ThemeService {
       this.document.documentElement.setAttribute('data-theme', state.theme);
       this.document.documentElement.setAttribute('data-color-mode', state.colorMode);
       this.primeng.theme.set({
-        preset: THEME_PRESETS[state.theme],
+        preset: this.themePresets[state.theme],
         options: { darkModeSelector: '[data-color-mode="dark"]' },
       });
     });
@@ -54,16 +56,16 @@ export class ThemeService {
         THEME_STATE_STORAGE_KEY,
       );
       if (!storedState) {
-        return DEFAULT_THEME_STATE;
+        return this.defaultThemeState;
       }
       const isThemeValid: boolean = Object.values(Theme).includes(storedState.theme);
       const isColorModeValid: boolean = Object.values(ColorMode).includes(storedState.colorMode);
       if (!isThemeValid || !isColorModeValid) {
-        return DEFAULT_THEME_STATE;
+        return this.defaultThemeState;
       }
       return storedState;
     } catch {
-      return DEFAULT_THEME_STATE;
+      return this.defaultThemeState;
     }
   }
 
