@@ -13,10 +13,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss',
 })
+
 export class MessageComponent {
+
   messageService: MessageService = inject(MessageService);
   messages$: Observable<IMessage[]> = this.messageService.messages$;
 
   deleteIcon: IconDefinition = faXmarkCircle;
   mailIcon: IconDefinition = faEnvelope;
+
 }

@@ -14,7 +14,9 @@ import { faShieldHalved, faTag, faPeopleGroup } from '@fortawesome/free-solid-sv
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
+
 export class HomePageComponent {
+
   messageService: MessageService = inject(MessageService);
 
   companySlogan: string = 'Насладись прогулкой в горах';
@@ -103,4 +105,5 @@ export class HomePageComponent {
   openDatePicker(input: HTMLInputElement): void {
     input.showPicker();
   }
+
 }

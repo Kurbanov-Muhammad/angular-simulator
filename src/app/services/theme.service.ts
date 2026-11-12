@@ -18,6 +18,7 @@ const THEME_STATE_STORAGE_KEY: string = 'theme-state';
 @Injectable({
   providedIn: 'root',
 })
+
 export class ThemeService {
 
   private defaultThemeState: ThemeState = {

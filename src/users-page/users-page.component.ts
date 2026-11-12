@@ -13,7 +13,9 @@ import { UsersFilterComponent } from '../users-filter/users-filter.component';
   templateUrl: './users-page.component.html',
   styleUrl: './users-page.component.scss',
 })
+
 export class UsersPageComponent {
+
   private userService: UserService = inject(UserService);
   private searchSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
   users$: Observable<IUser[]> = this.userService.users$;
@@ -41,4 +43,5 @@ export class UsersPageComponent {
   onSearchChange(value: string): void {
     this.searchSubject.next(value);
   }
+
 }

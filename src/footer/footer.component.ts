@@ -11,7 +11,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
+
 export class FooterComponent {
+
   footerLinks: IFooterLink[] = [
     {
       id: 1,
@@ -69,4 +71,5 @@ export class FooterComponent {
   ];
 
   companyMedia: IconDefinition[] = [faTelegram, faVk, faPinterest, faSkype];
+
 }

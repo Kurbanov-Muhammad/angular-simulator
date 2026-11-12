@@ -14,21 +14,6 @@ import { SelectButtonChangeEvent, SelectButtonModule } from 'primeng/selectbutto
 import { IThemeOption } from '../app/interfaces/IThemeOption';
 import { Theme } from '../enums/Theme';
 
-const THEME_OPTIONS: IThemeOption[] = [
-  {
-    label: 'Aura',
-    value: Theme.AURA,
-  },
-  {
-    label: 'Lara',
-    value: Theme.LARA,
-  },
-  {
-    label: 'Nora',
-    value: Theme.NORA,
-  },
-];
-
 @Component({
   selector: 'app-header',
   imports: [
@@ -43,16 +28,32 @@ const THEME_OPTIONS: IThemeOption[] = [
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
+
 export class HeaderComponent {
 
   themeService: ThemeService = inject(ThemeService);
+
+  themeOptions: IThemeOption[] = [
+    {
+      label: 'Aura',
+      value: Theme.AURA,
+    },
+    {
+      label: 'Lara',
+      value: Theme.LARA,
+    },
+    {
+      label: 'Nora',
+      value: Theme.NORA,
+    },
+  ];
+
   currentTime: string = '';
   clickCount: number = 0;
   showClock: boolean = true;
 
   sunIcon: IconDefinition = faSun;
   moonIcon: IconDefinition = faMoon;
-  themeOptions: IThemeOption[] = THEME_OPTIONS;
 
   themeState$: Observable<ThemeState> = this.themeService.themeState$;
   colorModes: typeof ColorMode = ColorMode;
