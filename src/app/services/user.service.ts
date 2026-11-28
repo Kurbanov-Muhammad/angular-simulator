@@ -10,7 +10,6 @@ import { StorageService } from './storage.service';
 @Injectable({
   providedIn: 'root',
 })
-
 export class UserService {
 
   private userApiService: UserApiService = inject(UserApiService);
@@ -45,7 +44,9 @@ export class UserService {
         this.setUsers(users);
       }),
       catchError((error: HttpErrorResponse) => {
-        this.messageService.showError('Не удалось загрузить пользователей');
+        if (error.status < 500) {
+          this.messageService.showError('Не удалось загрузить пользователей');
+        }
         return of([]);
       }),
       finalize(() => {
